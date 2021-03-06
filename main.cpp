@@ -24,8 +24,8 @@ int main() {
 
         std::cout << "Attempts: " << attempts << '\n' << std::endl;
 
-        for (int i = 0; i < word.length(); i++)
-            std::cout << mask[i];
+        for (const auto &m : mask)
+            std::cout << m;
         std::cout << std::endl;
 
         std::cin >> letter;
