@@ -1,43 +1,35 @@
 #include <iostream>
+#include <cstdlib>
+//#include <string> //so, iostream include string
 
 int main() {
     const std::string word = "hangman";
+    std::string mask(word.length(), '*');
     int attempts = word.length() * 2;
-
-    char mask[word.length()];
-    for (int i = 0; i < word.length(); i++)
-        mask[i] = '*';
 
     char letter;
     int length = 0;
     while (length < word.length()) {
         if (attempts <= 0) {
-            std::cout << "Lose" << std::endl;
+            printf("Lose\n");
             break;
         }
 
-#ifdef __linux__
         system("clear");
-#elif _WIN32
-        system("cls");
-#endif
 
-        std::cout << "Attempts: " << attempts << '\n' << std::endl;
+        printf("Attempts: %d\n\nWord: %s\n", attempts, mask.c_str());
+        printf("Letter: ");
+        scanf("%s", &letter);
 
-        for (const auto &m : mask)
-            std::cout << m;
-        std::cout << std::endl;
-
-        std::cin >> letter;
         for (int i = 0; i < word.length(); i++) {
-            if (word.c_str()[i] == letter && mask[i] != letter) {
+            if (word[i] == letter && mask[i] != letter) {
                 mask[i] = letter;
                 length++;
             }
         }
         attempts--;
     }
-    std::cout << word << std::endl;
+    printf("%s\n", word.c_str());
 
     return 0;
 }
